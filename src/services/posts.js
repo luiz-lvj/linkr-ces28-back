@@ -21,3 +21,13 @@ export async function createPostservice(post){
         return 0;
     }
 }
+
+export async function getPostService(){
+    try{
+        const posts = await connection.query("SELECT * FROM posts");
+        return posts.rows;
+    }catch(err){
+        console.log(err);
+        return [];
+    }
+}
