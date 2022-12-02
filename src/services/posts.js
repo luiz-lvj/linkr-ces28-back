@@ -70,3 +70,15 @@ export async function getPostByIdService(id){
         return null;
     }
 }
+
+// get posts liked by user
+
+export async function getPostsLikedByUser(id){
+    try{
+        const posts = await connection.query(`SELECT * FROM posts WHERE id IN (SELECT post_id FROM likes WHERE user_id = $1)`,[id]);
+        return posts.rows;
+    }catch(err){
+        console.log(err);
+        return [];
+    }
+}
