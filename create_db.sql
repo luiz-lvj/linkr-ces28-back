@@ -1,7 +1,7 @@
 CREATE DATABASE Linkr;
 
 CREATE TABLE users(
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     email TEXT UNIQUE,
     password TEXT,
     username TEXT,
