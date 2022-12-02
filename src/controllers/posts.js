@@ -102,7 +102,7 @@ export async function getPostsController(req, res){
 export async function editPostController(req, res){
     try{
         const text = req.body.text;
-        const id = req.body.id;
+        const id = req.params.postId;
         const auth = req.headers.authorization;
         const token = String(auth).split(" ")[1];
         console.log(token)
@@ -155,7 +155,7 @@ export async function editPostController(req, res){
 
 export async function deletePostController(req, res){
     try{
-        const id = req.body.id;
+        const id = req.params.postId;
         const auth = req.headers.authorization;
         const token = String(auth).split(" ")[1];
         console.log(token)

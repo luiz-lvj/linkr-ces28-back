@@ -67,7 +67,7 @@ export async function getPostByIdService(id){
         return post.rows[0];
     }catch(err){
         console.log(err);
-        return [];
+        return null;
     }
 }
 
