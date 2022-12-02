@@ -5,7 +5,7 @@ import express from "express";
 import cors from "cors";
 import { signUpController } from "./controllers/signUp.js";
 import { signInController } from "./controllers/signIn.js";
-import { createPostController, getPostsController } from "./controllers/posts.js";
+import { createPostController, deletePostController, editPostController, getPostsController } from "./controllers/posts.js";
 
 const app = express();
 app.use(cors());
@@ -18,6 +18,9 @@ app.post("/sign-in", async (req, res) => await signInController(req, res));
 
 app.post("/posts", async (req, res) => await createPostController(req, res));
 app.get("/posts", async (req, res) => await getPostsController(req, res));
+
+app.put("/posts/:postId", async (req, res) => await editPostController(req, res));
+app.delete("/posts/:postId", async (req, res) => await deletePostController(req, res));
 
 
 app.listen(port, () => {
