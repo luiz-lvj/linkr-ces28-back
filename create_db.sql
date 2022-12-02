@@ -15,7 +15,7 @@ CREATE TABLE sessions(
 );
 
 CREATE TABLE posts(
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     text TEXT,
     link TEXT,
     linkTitle TEXT,
@@ -25,7 +25,7 @@ CREATE TABLE posts(
 );
 
 CREATE TABLE likes(
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     post_id INT REFERENCES posts(id),
     createdAt DATE DEFAULT NOW(),
@@ -33,7 +33,7 @@ CREATE TABLE likes(
 );
 
 CREATE TABLE hashtags(
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name TEXT,
     numberOfMentions INT
 );
@@ -44,7 +44,7 @@ CREATE TABLE followers(
 );
 
 CREATE TABLE comments(
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     post_id INT REFERENCES posts(id),
     text TEXT

@@ -10,11 +10,12 @@ export async function createPostservice(post){
         const linkDescription = post.linkDescription;
         const linkImage = post.linkImage;
         const userId = post.userId;
+        console.log(post)
 
-        const post = await connection.query(`INSERT INTO 
+        const postRes = await connection.query(`INSERT INTO 
                     posts(text, link, linkTitle, linkDescription, linkImage, user_id)
                     VALUES($1, $2, $3, $4, $5, $6) RETURNING id`,[text, link, linkTitle, linkDescription, linkImage, userId]);
-        return post.rows[0].id;
+        return postRes.rows[0].id;
     }catch(err){
         console.log(err);
         return 0;

@@ -26,7 +26,7 @@ export async function createPostController(req, res){
         }
         const postId = await createPostservice(bodyPost);
         if(postId == 0){
-            console.log("São salvou o post!");
+            console.log("Não salvou o post!");
             return res.sendStatus(500);
         }
         const likes = await getLikesFromPost(postId);
