@@ -184,3 +184,48 @@ export async function deletePostController(req, res){
         return res.sendStatus(500);
     }
 }
+
+// get posts that user like
+
+export async function getPostsLikedController(req, res) {
+    try{
+        const auth = req.headers.authorization;
+        const token = String(auth).split(" ")[1];
+        console.log(token)
+        
+        const user = await getUserByToken(token);
+        console.log(user);
+        if(user == null){
+            return res.sendStatus(404).json({"message":"usuario não encontrado"});
+        }
+
+        const posts = await getPostsLiked(user.id);
+
+        const postsEdited = await Promise.all(posts.map(async post => {
+            const userId = post.user_id;
+            const user = await getUserById(userId);
+            const likes = await getLikesFromPost(post.id);
+            const ans = {
+                id: post.id,
+                text: post.text,
+                link: post.link,
+                linkTitle: post.linkTitle,
+                linkDescription: post.linkDescription,
+                linkImage: post.linkImage,
+                user: {
+                    id: user.id,
+                    username: user.username,
+                    avatar: user.avatar
+                },
+                likes: likes
+            }
+            return ans;
+        }));
+
+        return res.send(postsEdited)
+
+    } catch(err){
+        console.log(err);
+        return res.sendStatus(500);
+    }
+}
